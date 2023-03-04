@@ -12,6 +12,7 @@ export const getCoinChartImage = async (coinName) => {
 
         await browser.defaultBrowserContext()
             .overridePermissions('https://www.tradingview.com', ['clipboard-read', 'clipboard-write']);
+
         const page = await browser.newPage();
         const pageTarget = page.target();
 

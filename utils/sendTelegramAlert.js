@@ -58,7 +58,7 @@ export const sendPumpAlert = async (coinsData) => {
 export const sendErrorAlert = async (text) => {
     try {
         if (typeof text === 'string') {
-            const { data } = await axios.post(config.body.telegramEndPoint, { ...config, text: text });
+            const { data } = await axios.post(config.telegramEndPoint, { ...config.body, text: text });
             console.log(data);
         }
     } catch (error) {

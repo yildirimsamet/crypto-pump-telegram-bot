@@ -1,26 +1,7 @@
 import { connectSocket } from './connectSocket.js';
 import { sendErrorAlert, sendPumpAlert } from './sendTelegramAlert.js';
 import { AlertStore } from './AlertStorage.js'
-
-const correlationList = [
-    ['COSUSDT', 'COCOSUSDT'],
-    ['AXSUSDT', 'SLPUSDT'],
-    ['AUTOUSDT', 'BIFIUSDT'],
-    ['QUICKUSDT', 'FARMUSDT'],
-    ['LOKAUSDT', 'VOXELUSDT'],
-    ['ASTRUSDT', 'ACAUSDT'],
-    ['LAZIOUSDT', 'PORTOUSDT'],
-    ['WINGUSDT', 'BONDUSDT'],
-    ['DREPBUSD', 'KEYBUSD'],
-    ['DFUSDT', 'CVPUSDT'],
-    ['PHBBUSD', 'AMBBUSD'],
-    ['HFTUSDT', 'STGUSDT'],
-    ['ACMUSDT', 'ATMUSDT'],
-    ['OGUSDT', 'ASRUSDT'],
-    ['RAYBUSD', 'SRMBUSD'],
-    ['ARUSDT', 'LPTUSDT'],
-    ['SUNUSDT', 'JSTUSDT']
-]
+import { correlationList } from '../enums/generalEnums.js';
 
 export const runSocket = () => {
     connectSocket(async (data) => {
