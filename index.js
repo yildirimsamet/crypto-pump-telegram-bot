@@ -27,8 +27,9 @@ app.post('/change-time-frame', (req, res) => {
 
 app.post('/change-minimum-pump-rate', (req, res) => {
     const minimumPumpRate = req.body.minimumPumpRate;
+
     if (minimumPumpRate) {
-        return pumpConfig.setMinimumPumpRate(minimumPumpRate)
+        return res.send(pumpConfig.setMinimumPumpRate(minimumPumpRate))
     }
     return res.send('minimumPumpRate parameter needed.')
 })

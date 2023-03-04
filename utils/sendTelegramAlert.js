@@ -1,6 +1,7 @@
 import axios from "axios";
 import * as dotenv from 'dotenv'
 import { getCoinChartImage } from "./getCoinChartImg.js";
+
 dotenv.config();
 
 const config = {
