@@ -15,6 +15,6 @@ app.get('/sended-coins', function (req, res) {
     return res.json({ data: AlertStore.getSendedCoinsInfo() });
 })
 
-app.listen(5000, function () {
+app.listen(PORT, function () {
     console.log(`Server running on http://localhost:${PORT}`);
 })
