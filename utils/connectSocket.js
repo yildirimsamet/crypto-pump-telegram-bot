@@ -15,7 +15,6 @@ export const connectSocket = (callback) => {
         
         client.on('connect', function (connection) {
             console.log('WebSocket Client Connected');
-            sendErrorAlert('Connected');
 
             connection.on('error', function (error) {
                 callback({
