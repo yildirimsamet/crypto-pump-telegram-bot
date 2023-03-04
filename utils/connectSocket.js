@@ -1,5 +1,4 @@
 import WebSocketClient from 'websocket';
-import { sendErrorAlert } from './sendTelegramAlert.js';
 const client = new WebSocketClient.client();
 
 export const connectSocket = (callback) => {

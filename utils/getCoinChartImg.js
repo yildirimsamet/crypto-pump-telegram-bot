@@ -1,8 +1,17 @@
 import puppeteer from "puppeteer";
+import { pumpConfig } from "./runSocket.js";
 import { sendErrorAlert } from "./sendTelegramAlert.js";
+
 
 export const getCoinChartImage = async (coinName) => {
     try {
+        const selectedTimeframeButton = {
+            '1m': '[data-name="menu-inner"] [data-value="1"]',
+            '5m': '[data-name="menu-inner"] [data-value="5"]',
+            '15m': '[data-name="menu-inner"] [data-value="15"]',
+            '1h': '[data-name="menu-inner"] [data-value="60"]',
+        }[pumpConfig.timeFrame]
+        
         const browser = await puppeteer.launch({
             headless: true,
             'clipboard-read': true,
@@ -26,15 +35,14 @@ export const getCoinChartImage = async (coinName) => {
         await page.click(timeIntervalMainButton);
 
         //Click 1m timeframe button
-        const oneMinTimeButton = '#overlap-manager-root > div > span > div.menuWrap-biWYdsXC > div > div > div > div:nth-child(9) > div'
-        await page.waitForSelector(oneMinTimeButton);
-        await page.click(oneMinTimeButton);
+        await page.waitForSelector(selectedTimeframeButton);
+        await page.click(selectedTimeframeButton);
 
-        //Wait 1.5s after click 1m timeframe button
+        //Wait 1.5s after click selected timeframe button
         await new Promise(r => setTimeout(r, 1500));
 
         //Click button which opens snapshot menu
-        const snapshotButton = 'body > div.js-rootresizer__contents.layout-with-border-radius > div.layout__area--top > div > div > div:nth-child(3) > div > div > div > div > div > div:nth-child(16) > div.button-reABrhVR.apply-common-tooltip'
+        const snapshotButton = '#header-toolbar-screenshot'
         await page.waitForSelector(snapshotButton);
         await page.click(snapshotButton);
 

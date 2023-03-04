@@ -15,7 +15,7 @@ class PumpConfig {
     }
 
     setMinimumPumpRate(minPumpRate) {
-        if (parseInt(minPumpRate)) {
+        if (typeof parseFloat(minPumpRate) === 'number') {
             this.minimumPumpRate = minPumpRate;
 
             return 'Success';

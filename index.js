@@ -17,7 +17,7 @@ app.get('/sended-coins', (req, res) => {
     return res.json({ data: AlertStore.getSendedCoinsInfo() });
 })
 
-app.post('/change-time-frame', (req, res) => {
+app.post('/timeframe', (req, res) => {
     const timeframe = req.body.timeframe;
     if (timeframe) {
         return res.send(pumpConfig.setTimeFrame(timeframe))
@@ -25,13 +25,13 @@ app.post('/change-time-frame', (req, res) => {
     return res.send('timeframe parameter needed.')
 })
 
-app.post('/change-minimum-pump-rate', (req, res) => {
-    const minimumPumpRate = req.body.minimumPumpRate;
+app.post('/pumprate', (req, res) => {
+    const pumprate = req.body.pumprate;
 
-    if (minimumPumpRate) {
-        return res.send(pumpConfig.setMinimumPumpRate(minimumPumpRate))
+    if (!isNaN(pumprate) && !isNaN(parseFloat(pumprate))) {
+        return res.send(pumpConfig.setMinimumPumpRate(pumprate))
     }
-    return res.send('minimumPumpRate parameter needed.')
+    return res.send('pumprate parameter needed.')
 })
 
 app.listen(PORT, () => {

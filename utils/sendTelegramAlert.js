@@ -1,6 +1,7 @@
 import axios from "axios";
 import * as dotenv from 'dotenv'
 import { getCoinChartImage } from "./getCoinChartImg.js";
+import { pumpConfig } from "./runSocket.js";
 
 dotenv.config();
 
@@ -20,7 +21,7 @@ const generatePumpAlertText = async (coinData) => {
     if (coinData.pumped) {
         const pumpedChartImg = await getCoinChartImage(coinData.symbol)
         text =
-        `[${coinData.symbol} pumped %${coinData.pumpRate.toFixed(2)} ${rockets} correlated coin is: ${coinData.correlatedSymbol || ''}](${pumpedChartImg})`;
+        `[${coinData.symbol} pumped %${coinData.pumpRate.toFixed(2)} in **${ pumpConfig.timeFrame }** ${rockets} correlated coin: ${coinData.correlatedSymbol || ''}](${pumpedChartImg})`;
     }
 
     if (coinData.correlated) {
