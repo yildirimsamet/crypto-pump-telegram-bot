@@ -1,7 +1,7 @@
 import WebSocketClient from 'websocket';
 import { sendErrorAlert } from './sendTelegramAlert';
 const client = new WebSocketClient.client();
-let connection;
+
 export const connectSocket = (callback) => {
     try {
         client.on('connectFailed', function (error) {
@@ -47,8 +47,7 @@ export const connectSocket = (callback) => {
             });
         });
         
-        client.abort(connection)
-        connection = client.connect(process.env.WEB_SOCKET_URL);
+        client.connect(process.env.WEB_SOCKET_URL);
     } catch (error) {
         callback({
             success: false,

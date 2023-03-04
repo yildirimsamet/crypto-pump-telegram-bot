@@ -7,16 +7,6 @@ const PORT = process.env.PORT || 5000;
 
 runSocket();
 
-// app.get('/run', async function (req, res) {
-//     try {
-//         runSocket();
-
-//         return res.send('Socket ran.');
-//     } catch (error) {
-//         return res.send(error.message || 'Socket couldnt run')
-//     }
-// })
-
 app.get('/last-alert', function (req, res) {
     return res.send(AlertStore.getLastAlertTime());
 })
