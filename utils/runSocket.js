@@ -28,7 +28,7 @@ export const runSocket = () => {
             if (data.success) {
                 const tickers = data.data;
                 const correlationFlatList = correlationList.flatMap((item) => item);
-                const minimumPumpRate = 0.2;
+                const minimumPumpRate = 2.5;
                 const timeFrame = '1m';
         
                 const foundPumpedCoins = tickers.filter((tickerData) => {
