@@ -9,6 +9,10 @@ const PORT = process.env.PORT || 5000;
 
 runSocket();
 
+app.get('/', (req, res) => {
+    res.send('Hi')
+})
+
 app.get('/last-alert', (req, res) => {
     return res.send(AlertStore.getLastAlertTime());
 })
