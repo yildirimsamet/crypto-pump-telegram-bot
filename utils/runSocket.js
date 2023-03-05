@@ -4,7 +4,7 @@ import { AlertStore } from './AlertStorage.js'
 import { correlationList } from '../enums/generalEnums.js';
 
 class PumpConfig {
-    constructor () {
+    constructor() {
         this.minimumPumpRate = '2';
         this.timeFrame = '1m';
         this.acceptedTimeFrames = ['1m', '5m', '15m', '1h'];
@@ -49,19 +49,20 @@ export const runSocket = () => {
                 const correlationFlatList = correlationList.flatMap((item) => item);
 
                 console.log({
-                    timeframe : pumpConfig.timeFrame,
-                    minPump: pumpConfig.minimumPumpRate
+                    timeframe: pumpConfig.timeFrame,
+                    pump: pumpConfig.minimumPumpRate,
+                    date: new Date(new Date().getTime() + 1000 * 60 * 60 * 3)
                 });
 
                 const foundPumpedCoins = tickers.filter((tickerData) => {
                     const { symbol, price_change_pct } = tickerData;
-        
+
                     return correlationFlatList.includes(symbol) && price_change_pct[pumpConfig.timeFrame] > pumpConfig.minimumPumpRate
                 })
-        
-                for (let i = 0; i < foundPumpedCoins.length; i ++) {
+
+                for (let i = 0; i < foundPumpedCoins.length; i++) {
                     const { symbol, price_change_pct } = foundPumpedCoins[i];
-        
+
                     if (symbol && price_change_pct) {
                         if (AlertStore.isAlertAbleToSend(symbol)) {
                             const alertPayload = {
@@ -70,20 +71,20 @@ export const runSocket = () => {
                                     pumpRate: price_change_pct[pumpConfig.timeFrame],
                                 }
                             }
-            
+
                             const correlatedCoin = correlationList.find(coinList => coinList.includes(symbol)).find(coinName => coinName != symbol);
                             const foundCoinPumpRateFromAllTickerData =
                                 ((tickers.find(ticker => ticker.symbol === correlatedCoin) || {}).price_change_pct || [])[pumpConfig.timeFrame];
-        
+
                             if (correlatedCoin && foundCoinPumpRateFromAllTickerData) {
                                 alertPayload.correlated = {
                                     symbol: correlatedCoin,
                                     pumpRate: foundCoinPumpRateFromAllTickerData
                                 }
-            
+
                                 AlertStore.push(symbol);
                                 AlertStore.push(correlatedCoin);
-            
+
                                 await sendPumpAlert(alertPayload);
                             }
                         }
