@@ -49,7 +49,9 @@ export const sendPumpAlert = async (coinsData) => {
             colleratedAlert: colleratedAlert.data
 
         });
+
         console.log('-------------------------------------------------');
+        return colleratedAlert;
     } catch (error) {
         console.log("sendPumpAlert error: " + error)
     }
@@ -62,6 +64,8 @@ export const sendErrorAlert = async (text) => {
         if (typeof text === 'string') {
             const { data } = await axios.post(config.telegramEndPoint, { ...config.body, text: text });
             console.log(data);
+
+            return data;
         }
     } catch (error) {
         console.log("sendErrorAlert error: " + error)

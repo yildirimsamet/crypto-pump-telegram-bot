@@ -5,7 +5,7 @@ import { correlationList } from '../enums/generalEnums.js';
 
 class PumpConfig {
     constructor() {
-        this.minimumPumpRate = '2';
+        this.minimumPumpRate = '2.8';
         this.timeFrame = '1m';
         this.acceptedTimeFrames = ['1m', '5m', '15m', '1h'];
     }

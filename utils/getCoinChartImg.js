@@ -13,7 +13,7 @@ export const getCoinChartImage = async (coinName) => {
         }[pumpConfig.timeFrame]
         
         const browser = await puppeteer.launch({
-            headless: true,
+            headless: false,
             'clipboard-read': true,
             defaultViewport: null,
             args: ["--no-sandbox", "--disable-setuid-sandbox"]
